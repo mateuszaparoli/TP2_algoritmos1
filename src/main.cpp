@@ -1,12 +1,14 @@
 #include <cstdio>
-
-#include "grafo.hpp"
+#include <iostream>
+#include "algoritmo.hpp"
 
 int main(){
     int numPontos;
     int numFios;
 
     Grafo redeEletrica; 
+
+    redeEletrica.adicionarOrigemDestino();
 
     scanf("%d %d", &numPontos, &numFios);
 
@@ -39,4 +41,10 @@ int main(){
     }
 
     redeEletrica.print();
+
+    std::cout << "Grafo Residual" << std::endl;
+    Grafo grafoResidual;
+    redeEletrica.criarGrafoResidual(grafoResidual);
+
+    grafoResidual.print();
 }

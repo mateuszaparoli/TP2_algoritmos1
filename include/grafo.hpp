@@ -6,6 +6,7 @@
 
 #include "gerador.hpp"
 #include "consumidor.hpp"
+#include "ponto.hpp"
 
 class Grafo{
     private:
@@ -14,9 +15,9 @@ class Grafo{
         Ponto destinoGlobal;
 
     public:
-        Grafo(Ponto origemGlobal, Ponto destinoGlobal);
+        Grafo();
         ~Grafo();
-        void setConexao(Ponto origem, Ponto destino);
+        void setConexao(Ponto origem, Ponto destino, int capacidade);
         void addPonto(Ponto ponto);
 };
 

@@ -18,7 +18,10 @@ void Ponto::setTipo(char tipo){
     this->tipo = tipo;
 }
 
-void Ponto::getTipo(){
+char Ponto::getTipo(){
     return tipo;
 }
 
+void setDemanda(int demanda){
+    this->demanda = demanda;
+}

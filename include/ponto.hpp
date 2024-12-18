@@ -1,7 +1,7 @@
 #ifndef PONTO
 #define PONTO
 
-#include "consumidor.hpp"
+//#include "consumidor.hpp"
 
 class Ponto{
     private:

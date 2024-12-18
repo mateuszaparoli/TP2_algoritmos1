@@ -1,5 +1,11 @@
 #include "ponto.hpp"
 
+Ponto::Ponto(){
+    identificador = -1;
+    tipo = ' ';
+    demanda = 0;
+}
+
 Ponto::Ponto(int identificador, char tipo, int demanda){
     this->identificador = identificador;
     this->tipo = tipo;
@@ -22,6 +28,6 @@ char Ponto::getTipo(){
     return tipo;
 }
 
-void setDemanda(int demanda){
+void Ponto::setDemanda(int demanda){
     this->demanda = demanda;
 }

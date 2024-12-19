@@ -134,7 +134,7 @@ void Grafo::atualizarGrafo(Grafo* grafoResidual){
                 }
                 if(grafoResidual->fluxos[i][j] > 0){
                     grafoResidual->capacidades[j][i] = grafoResidual->fluxos[i][j];
-                }//to aqui
+                }
             }
         }
     }

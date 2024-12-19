@@ -30,7 +30,7 @@ Grafo::Grafo(){
     fluxos[0][499] = 0;
     fluxos[499][0] = 0;
 
-    for(int i = 0; i < 500; i++){
+    for(int i = 1; i < 499; i++){
         ativos[i] = 0;
     }
 
@@ -43,22 +43,23 @@ Grafo::Grafo(){
     //this->vertices = std::vector<Ponto>();
 }
 
+//arrumar os free
 Grafo::~Grafo(){
-    for(int i = 0; i < 500; i++){
-        delete[] capacidades[i];
-    }
-    delete[] capacidades;
-    for(int i = 0; i < 500; i++){
-        delete[] fluxos[i];
-    }
-    delete[] fluxos;
+    //for(int i = 0; i < 500; i++){
+    //    delete[] capacidades[i];
+    //}
+    //delete[] capacidades;
+    //for(int i = 0; i < 500; i++){
+    //    delete[] fluxos[i];
+    //}
+    //delete[] fluxos;
 }
 
 void Grafo::setConexao(int origem, int destino, int capacidade){
-    if(capacidades[origem][destino] != -1){
-        std::cout << "Conexao de " << origem << " para " << destino << " ja existe" << std::endl;
-        return;
-    }
+    //if(capacidades[origem][destino] != -1){
+    //    std::cout << "Conexao de " << origem << " para " << destino << " ja existe" << std::endl;
+    //    return;
+    //}
     capacidades[origem][destino] = capacidade;
     //std::cout << "Conexao de " << origem << " para " << destino << " de capacidade " << capacidade << " estabelecida" << std::endl;
     return;
@@ -95,14 +96,19 @@ void Grafo::print(){
     return;
 }
 
-void Grafo::criarGrafoResidual(Grafo grafoResidual){
-    for(int i = 1; i < 499; i++){
-       for(int j = 1; j < 499; j++){
-            if(this->capacidades[i][j] > (-1) && i != j){
-                std::cout << "aaaaaaa" << this->capacidades[i][j] << std::endl;
+//achar um jeito de nao ter a aresta 0-2 no residual
 
-                int capacidade = this->capacidades[i][j] - this->fluxos[i][j];
-                int fluxo = this->fluxos[i][j];
+void Grafo::criarGrafoResidual(Grafo grafo,Grafo grafoResidual){
+    for(int i = 0; i < 500; i++){
+       for(int j = 0; j < 500; j++){
+            if(grafo.capacidades[i][j] > (-1) && i < j ){
+                std::cout << "aaaaaaa" << grafo.capacidades[i][j] << std::endl;
+
+                ativos[i] = 1;
+                ativos[j] = 1;
+
+                int capacidade = grafo.capacidades[i][j] - grafo.fluxos[i][j];
+                int fluxo = grafo.fluxos[i][j];
                 
                 grafoResidual.setConexao(i, j, capacidade);
                 grafoResidual.setConexao(j, i, fluxo);
@@ -113,3 +119,4 @@ void Grafo::criarGrafoResidual(Grafo grafoResidual){
         }
     }
 }
+

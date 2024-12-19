@@ -2,18 +2,18 @@
 #include <iostream>
 
 Grafo::Grafo(){
-    capacidades = new int*[500];
-    for(int i = 0; i < 500; i++){
-        capacidades[i] = new int[500];
-        for(int j = 0; j < 500; j++){
+    capacidades = new int*[TAMANHO];
+    for(int i = 0; i < TAMANHO; i++){
+        capacidades[i] = new int[TAMANHO];
+        for(int j = 0; j < TAMANHO; j++){
             capacidades[i][j] = -1;
         }
     }
 
-    fluxos = new int*[500];
-    for(int i = 0; i < 500; i++){
-        fluxos[i] = new int[500];
-        for(int j = 0; j < 500; j++){
+    fluxos = new int*[TAMANHO];
+    for(int i = 0; i < TAMANHO; i++){
+        fluxos[i] = new int[TAMANHO];
+        for(int j = 0; j < TAMANHO; j++){
             fluxos[i][j] = 0;
         }
     }
@@ -21,21 +21,21 @@ Grafo::Grafo(){
     this->origemGlobal.setIdentificador(0);
     this->origemGlobal.setTipo('g');
     this->origemGlobal.setDemanda(0);
-    this->destinoGlobal.setIdentificador(499);
+    this->destinoGlobal.setIdentificador(TAMANHO - 1);
     this->destinoGlobal.setTipo('c');
     this->destinoGlobal.setDemanda(2000);
 
-    capacidades[0][499] = -1;
-    capacidades[499][0] = -1;
-    fluxos[0][499] = 0;
-    fluxos[499][0] = 0;
+    capacidades[0][TAMANHO - 1] = -1;
+    capacidades[TAMANHO - 1][0] = -1;
+    fluxos[0][TAMANHO - 1] = 0;
+    fluxos[TAMANHO - 1][0] = 0;
 
-    for(int i = 1; i < 499; i++){
+    for(int i = 1; i < TAMANHO - 1; i++){
         ativos[i] = 0;
     }
 
     ativos[0] = 1;
-    ativos[499] = 1;
+    ativos[TAMANHO - 1] = 1;
 
     //vertices.push_back(origemGlobal);
     //vertices.push_back(destinoGlobal);
@@ -45,11 +45,11 @@ Grafo::Grafo(){
 
 //arrumar os delete talvez colocar free
 Grafo::~Grafo(){
-    //for(int i = 0; i < 500; i++){
+    //for(int i = 0; i < TAMANHO; i++){
     //    delete[] capacidades[i];
     //}
     //delete[] capacidades;
-    //for(int i = 0; i < 500; i++){
+    //for(int i = 0; i < TAMANHO; i++){
     //    delete[] fluxos[i];
     //}
     //delete[] fluxos;
@@ -83,8 +83,8 @@ void Grafo::addPonto(Ponto ponto){
 }
 
 void Grafo::print(){
-    for(int i = 0; i < 500; i++){
-        for(int j = 0; j < 500; j++){
+    for(int i = 0; i < TAMANHO; i++){
+        for(int j = 0; j < TAMANHO; j++){
             if(capacidades[i][j] > -1 && i != j && ativos[i] == 1 && ativos[j] == 1){
                 std::cout << "Conexao de " << i << " para " << j << " de capacidade " << capacidades[i][j] << std::endl;
             }
@@ -99,8 +99,8 @@ void Grafo::print(){
 //achar um jeito de nao ter a aresta 0-2 no residual
 
 void Grafo::criarGrafoResidual(Grafo* grafo,Grafo* grafoResidual){
-    for(int i = 0; i < 500; i++){
-       for(int j = 0; j < 500; j++){
+    for(int i = 0; i < TAMANHO; i++){
+       for(int j = 0; j < TAMANHO; j++){
             if(grafo->capacidades[i][j] > (-1) && i < j ){
                 std::cout << "aaaaaaa" << grafo->capacidades[i][j] << std::endl;
 
@@ -126,8 +126,8 @@ void Grafo::setFluxo(int origem, int destino, int fluxo){
 }
 
 void Grafo::atualizarGrafo(Grafo* grafoResidual){
-    for(int i = 0; i < 500; i++){
-        for(int j = 0; j < 500; j++){
+    for(int i = 0; i < TAMANHO; i++){
+        for(int j = 0; j < TAMANHO; j++){
             if(grafoResidual->capacidades[i][j] > -1){
                 if(grafoResidual->fluxos[i][j] < grafoResidual->capacidades[i][j]){
                     grafoResidual->capacidades[i][j] = grafoResidual->capacidades[i][j] - grafoResidual->fluxos[i][j];

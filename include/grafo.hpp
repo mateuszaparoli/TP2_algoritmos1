@@ -7,6 +7,8 @@
 //#include "gerador.hpp"
 //#include "consumidor.hpp"
 #include "ponto.hpp"
+#define TAMANHO 5
+
 
 class Grafo{
     private:
@@ -18,7 +20,7 @@ class Grafo{
         Ponto destinoGlobal;
         std::vector<Ponto> vertices;
 
-        int ativos[500];
+        int ativos[TAMANHO];
 
     public:
         Grafo();

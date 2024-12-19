@@ -11,7 +11,7 @@ bool BFS(Grafo* residual, int* antecessores, bool* visitados, int origemID, int 
         fila.pop();
         visitados[atual] = true;
 
-        for(int i = 0; i < 500; i++){
+        for(int i = 0; i < TAMANHO; i++){
             int k = residual->getCapacidade(atual, i);
 
             if(k > 0 && !visitados[i] && residual->getAtivo(i)){
@@ -26,13 +26,13 @@ bool BFS(Grafo* residual, int* antecessores, bool* visitados, int origemID, int 
 }
 
 int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
-    bool* visitados = new bool[500];
-    int* antecessores = new int[500];
+    bool* visitados = new bool[TAMANHO ];
+    int* antecessores = new int[TAMANHO ];
 
-    for(int i = 0; i < 500; i++){
+    for(int i = 0; i < TAMANHO ; i++){
         visitados[i] = false;
     }
-    for(auto i = 0; i < 500; i++){
+    for(auto i = 0; i < TAMANHO ; i++){
         antecessores[i] = -1;
     }
 
@@ -56,6 +56,6 @@ int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
         fluxoMax += fluxoCaminho;
     }
 
-
+    
     return fluxoMax;
 }

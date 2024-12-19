@@ -150,5 +150,10 @@ Ponto Grafo::getDestino(){
 }
 
 Ponto Grafo::getOrigem(){
+    //std::cout << "origem: " << origemGlobal.getIdentificador() << std::endl;
     return origemGlobal;
+}
+
+bool Grafo::getAtivo(int i){
+    return ativos[i];
 }

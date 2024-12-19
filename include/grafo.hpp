@@ -33,6 +33,7 @@ class Grafo{
         void atualizarGrafo(Grafo* grafoResidual);
         Ponto getDestino();
         Ponto getOrigem();
+        bool getAtivo(int i);
 };
 
 

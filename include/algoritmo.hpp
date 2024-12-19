@@ -2,7 +2,7 @@
 #include <queue>
 #include <climits>
 
-int BFS(Grafo* residual, int* antecessores, bool* visitados, int origemID, int destinoID){
+bool BFS(Grafo* residual, int* antecessores, bool* visitados, int origemID, int destinoID){
     std::queue<int> fila;
     fila.push(origemID);
 
@@ -14,18 +14,20 @@ int BFS(Grafo* residual, int* antecessores, bool* visitados, int origemID, int d
         for(int i = 0; i < 500; i++){
             int k = residual->getCapacidade(atual, i);
 
-            if(k > 0 && !visitados[i]){
+            if(k > 0 && !visitados[i] && residual->getAtivo(i)){
+                std::cout << i << std::endl;
                 fila.push(i);
                 antecessores[i] = atual;
             } 
         }
     }
+    std::cout << "visitados: " << visitados[destinoID] << std::endl;
     return visitados[destinoID];
 }
 
 int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
-    bool visitados[500];
-    int antecessores[500];
+    bool* visitados = new bool[500];
+    int* antecessores = new int[500];
 
     for(int i = 0; i < 500; i++){
         visitados[i] = false;
@@ -38,7 +40,7 @@ int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
 
     while( BFS(grafoResidual, antecessores, visitados, origem.getIdentificador(), destino.getIdentificador())){
         int fluxoCaminho = INT_MAX;
-
+        std::cout << "fluxo caminho: " << fluxoCaminho << std::endl;
 
         for(int i = destino.getIdentificador(); i != origem.getIdentificador(); i = antecessores[i]){
             int j = antecessores[i];

@@ -27,7 +27,8 @@ class Grafo{
         void setConexao(int origem, int destino, int capacidade);
         void addPonto(Ponto ponto);
         void print();
-        void criarGrafoResidual(Grafo grafo, Grafo GrafoResidual);
+        void criarGrafoResidual(Grafo* grafo, Grafo* GrafoResidual);
+        void setFluxo(int origem, int destino, int fluxo);
 };
 
 

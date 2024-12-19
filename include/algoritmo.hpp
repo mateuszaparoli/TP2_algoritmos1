@@ -3,6 +3,6 @@
 
 #include "grafo.hpp"
 
-Grafo ciarGrafoResidual(Grafo grafo);
+//void fordFulkerson(Grafo grafo, Ponto origem, Ponto destino);
 
 #endif

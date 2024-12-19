@@ -46,7 +46,7 @@ int main(){
 
     std::cout << "Grafo Residual" << std::endl;
     
-    redeEletrica.criarGrafoResidual(redeEletrica, grafoResidual);
+    redeEletrica.criarGrafoResidual(&redeEletrica, &grafoResidual);
 
     grafoResidual.print();
 

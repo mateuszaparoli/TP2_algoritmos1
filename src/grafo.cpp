@@ -43,7 +43,7 @@ Grafo::Grafo(){
     //this->vertices = std::vector<Ponto>();
 }
 
-//arrumar os free
+//arrumar os delete talvez colocar free
 Grafo::~Grafo(){
     //for(int i = 0; i < 500; i++){
     //    delete[] capacidades[i];
@@ -98,25 +98,45 @@ void Grafo::print(){
 
 //achar um jeito de nao ter a aresta 0-2 no residual
 
-void Grafo::criarGrafoResidual(Grafo grafo,Grafo grafoResidual){
+void Grafo::criarGrafoResidual(Grafo* grafo,Grafo* grafoResidual){
     for(int i = 0; i < 500; i++){
        for(int j = 0; j < 500; j++){
-            if(grafo.capacidades[i][j] > (-1) && i < j ){
-                std::cout << "aaaaaaa" << grafo.capacidades[i][j] << std::endl;
+            if(grafo->capacidades[i][j] > (-1) && i < j ){
+                std::cout << "aaaaaaa" << grafo->capacidades[i][j] << std::endl;
 
                 ativos[i] = 1;
                 ativos[j] = 1;
 
-                int capacidade = grafo.capacidades[i][j] - grafo.fluxos[i][j];
-                int fluxo = grafo.fluxos[i][j];
+                int capacidade = grafo->capacidades[i][j] - grafo->fluxos[i][j];
+                int fluxo = grafo->fluxos[i][j];
                 
-                grafoResidual.setConexao(i, j, capacidade);
-                grafoResidual.setConexao(j, i, fluxo);
+                grafoResidual->setConexao(i, j, capacidade);
+                grafoResidual->setConexao(j, i, fluxo);
 
-                grafoResidual.fluxos[i][j] = 0;
-                grafoResidual.fluxos[j][i] = 0;
+                grafoResidual->fluxos[i][j] = 0;
+                grafoResidual->fluxos[j][i] = 0;
             }
         }
     }
 }
 
+void Grafo::setFluxo(int origem, int destino, int fluxo){
+    fluxos[origem][destino] = fluxo;
+    return;
+}
+
+void Grafo::atualizarGrafo(Grafo* grafoResidual){
+    for(int i = 0; i < 500; i++){
+        for(int j = 0; j < 500; j++){
+            if(grafoResidual->capacidades[i][j] > -1){
+                if(grafoResidual->fluxos[i][j] < grafoResidual->capacidades[i][j]){
+                    grafoResidual->capacidades[i][j] = grafoResidual->capacidades[i][j] - grafoResidual->fluxos[i][j];
+                }
+                if(grafoResidual->fluxos[i][j] > 0){
+                    grafoResidual->capacidades[j][i] = grafoResidual->fluxos[i][j];
+                }//to aqui
+            }
+        }
+    }
+    return;
+}

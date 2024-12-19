@@ -29,6 +29,10 @@ class Grafo{
         void print();
         void criarGrafoResidual(Grafo* grafo, Grafo* GrafoResidual);
         void setFluxo(int origem, int destino, int fluxo);
+        int getCapacidade(int origem, int destino);
+        void atualizarGrafo(Grafo* grafoResidual);
+        Ponto getDestino();
+        Ponto getOrigem();
 };
 
 

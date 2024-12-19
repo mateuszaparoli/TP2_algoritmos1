@@ -140,3 +140,15 @@ void Grafo::atualizarGrafo(Grafo* grafoResidual){
     }
     return;
 }
+
+int Grafo::getCapacidade(int origem, int destino){
+    return capacidades[origem][destino];
+}
+
+Ponto Grafo::getDestino(){
+    return destinoGlobal;
+}
+
+Ponto Grafo::getOrigem(){
+    return origemGlobal;
+}

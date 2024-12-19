@@ -50,5 +50,9 @@ int main(){
 
     grafoResidual.print();
 
+    int fluxoMax = fordFulkerson(&grafoResidual, redeEletrica.getOrigem(), redeEletrica.getDestino());
+    //nao para de rodar
+    std::cout << "Fluxo maximo: " << fluxoMax << std::endl;
+
     return 0;
 }

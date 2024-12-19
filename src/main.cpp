@@ -7,8 +7,9 @@ int main(){
     int numFios;
 
     Grafo redeEletrica; 
+    Grafo grafoResidual;
 
-    redeEletrica.adicionarOrigemDestino();
+    //redeEletrica.adicionarOrigemDestino();
 
     scanf("%d %d", &numPontos, &numFios);
 
@@ -28,6 +29,7 @@ int main(){
         Ponto ponto(identificador, tipo, demanda);
 
         redeEletrica.addPonto(ponto);
+        grafoResidual.addPonto(ponto);
     }
 
     for(int i = 0; i < numFios; i++){
@@ -43,8 +45,10 @@ int main(){
     redeEletrica.print();
 
     std::cout << "Grafo Residual" << std::endl;
-    Grafo grafoResidual;
+    
     redeEletrica.criarGrafoResidual(grafoResidual);
 
     grafoResidual.print();
+
+    return 0;
 }

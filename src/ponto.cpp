@@ -3,7 +3,7 @@
 Ponto::Ponto(){
     identificador = -1;
     tipo = ' ';
-    demanda = 0;
+    demanda = -1;
 }
 
 Ponto::Ponto(int identificador, char tipo, int demanda){

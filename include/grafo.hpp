@@ -18,10 +18,12 @@ class Grafo{
         Ponto destinoGlobal;
         std::vector<Ponto> vertices;
 
+        int ativos[500];
+
     public:
         Grafo();
         ~Grafo();
-        void adicionarOrigemDestino();
+        //void adicionarOrigemDestino();
         void setConexao(int origem, int destino, int capacidade);
         void addPonto(Ponto ponto);
         void print();

@@ -60,8 +60,20 @@ void Grafo::setConexao(int origem, int destino, int capacidade){
     //    std::cout << "Conexao de " << origem << " para " << destino << " ja existe" << std::endl;
     //    return;
     //}
+    bool primeira = false;
+    if(capacidades[origem][destino] == -1){
+        primeira = true;
+    }
     capacidades[origem][destino] = capacidade;
+    if(capacidades[0][origem] != -1 && origem != 0 && primeira == true){
+        this->geracaoTotal += capacidade;
+    }
     //std::cout << "Conexao de " << origem << " para " << destino << " de capacidade " << capacidade << " estabelecida" << std::endl;
+    return;
+}
+
+void Grafo::setConexaoReversa(int origem, int destino, int capacidade){
+    fluxos[origem][destino] = capacidade;
     return;
 }
 
@@ -73,7 +85,7 @@ void Grafo::addPonto(Ponto ponto){
         return;
     }
     else if(ponto.getTipo() == 'c'){
-        setConexao(ponto.getIdentificador(), destinoGlobal.getIdentificador(), 20000);
+        setConexao(ponto.getIdentificador(), destinoGlobal.getIdentificador(), ponto.getDemanda());
         //vertices.push_back(ponto);
         ativos[ponto.getIdentificador()] = 1;
         return;
@@ -96,53 +108,40 @@ void Grafo::print(){
     return;
 }
 
+void Grafo::printMatriz(){
+    for(int i = 0; i < TAMANHO; i++){
+        for(int j = 0; j < TAMANHO; j++){
+            std::cout << capacidades[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    return;
+}
+
 //achar um jeito de nao ter a aresta 0-2 no residual
 
 void Grafo::criarGrafoResidual(Grafo* grafo,Grafo* grafoResidual){
     for(int i = 0; i < TAMANHO; i++){
        for(int j = 0; j < TAMANHO; j++){
-            if(grafo->capacidades[i][j] > (-1) && i < j ){
-                std::cout << "aaaaaaa" << grafo->capacidades[i][j] << std::endl;
+            if(grafo->capacidades[i][j] > (-1)){
 
                 ativos[i] = 1;
                 ativos[j] = 1;
 
-                int capacidade = grafo->capacidades[i][j] - grafo->fluxos[i][j];
-                int fluxo = grafo->fluxos[i][j];
+                int capacidade = grafo->capacidades[i][j];
                 
                 grafoResidual->setConexao(i, j, capacidade);
-                grafoResidual->setConexao(j, i, fluxo);
-
-                grafoResidual->fluxos[i][j] = 0;
-                grafoResidual->fluxos[j][i] = 0;
             }
         }
     }
-}
-
-void Grafo::setFluxo(int origem, int destino, int fluxo){
-    fluxos[origem][destino] = fluxo;
-    return;
-}
-
-void Grafo::atualizarGrafo(Grafo* grafoResidual){
-    for(int i = 0; i < TAMANHO; i++){
-        for(int j = 0; j < TAMANHO; j++){
-            if(grafoResidual->capacidades[i][j] > -1){
-                if(grafoResidual->fluxos[i][j] < grafoResidual->capacidades[i][j]){
-                    grafoResidual->capacidades[i][j] = grafoResidual->capacidades[i][j] - grafoResidual->fluxos[i][j];
-                }
-                if(grafoResidual->fluxos[i][j] > 0){
-                    grafoResidual->capacidades[j][i] = grafoResidual->fluxos[i][j];
-                }
-            }
-        }
-    }
-    return;
 }
 
 int Grafo::getCapacidade(int origem, int destino){
     return capacidades[origem][destino];
+}
+
+int Grafo::getCapacidadeReversa(int origem, int destino){
+    return fluxos[origem][destino];
 }
 
 Ponto Grafo::getDestino(){
@@ -156,4 +155,24 @@ Ponto Grafo::getOrigem(){
 
 bool Grafo::getAtivo(int i){
     return ativos[i];
+}
+
+std::vector<std::pair<int, int>> Grafo::getSaturadas() {
+    std::vector<std::pair<int, int>> saturadas;
+    for(int i = 1; i < TAMANHO-1; i++){
+        for(int j = 1; j < TAMANHO-1; j++){
+            if(capacidades[i][j] == 0) {
+                saturadas.push_back({i, j});
+            }
+        }
+    }
+    return saturadas;
+}
+
+Ponto Grafo::getPonto(int i){
+    return vertices[i];
+}
+
+int Grafo::getGeracaoTotal(){
+    return this->geracaoTotal;
 }

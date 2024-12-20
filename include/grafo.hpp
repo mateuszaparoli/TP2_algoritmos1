@@ -7,7 +7,7 @@
 //#include "gerador.hpp"
 //#include "consumidor.hpp"
 #include "ponto.hpp"
-#define TAMANHO 5
+#define TAMANHO 100
 
 
 class Grafo{
@@ -19,6 +19,7 @@ class Grafo{
         Ponto origemGlobal;
         Ponto destinoGlobal;
         std::vector<Ponto> vertices;
+        int geracaoTotal = 0;
 
         int ativos[TAMANHO];
 
@@ -27,15 +28,19 @@ class Grafo{
         ~Grafo();
         //void adicionarOrigemDestino();
         void setConexao(int origem, int destino, int capacidade);
+        void setConexaoReversa(int origem, int destino, int capacidade);
         void addPonto(Ponto ponto);
         void print();
         void criarGrafoResidual(Grafo* grafo, Grafo* GrafoResidual);
-        void setFluxo(int origem, int destino, int fluxo);
         int getCapacidade(int origem, int destino);
-        void atualizarGrafo(Grafo* grafoResidual);
+        int getCapacidadeReversa(int origem, int destino);
         Ponto getDestino();
         Ponto getOrigem();
         bool getAtivo(int i);
+        void printMatriz();
+        std::vector<std::pair<int, int>> getSaturadas();
+        Ponto getPonto(int i);
+        int getGeracaoTotal();
 };
 
 

@@ -17,6 +17,7 @@ class Ponto{
         void setTipo(char tipo);
         void setIdentificador(int identificador);
         void setDemanda(int demanda);
+        int getDemanda();
 };
 
 

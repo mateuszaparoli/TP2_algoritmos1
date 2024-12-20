@@ -31,3 +31,7 @@ char Ponto::getTipo(){
 void Ponto::setDemanda(int demanda){
     this->demanda = demanda;
 }
+
+int Ponto::getDemanda(){
+    return demanda;
+}

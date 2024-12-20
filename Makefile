@@ -21,7 +21,7 @@
 
 #cc and flags
 CC = g++
-CXXFLAGS = -std=c++17 -g -Wall -Wextra -Wpedantic -Wformat-security -Wconversion -Werror
+CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wpedantic -Wformat-security -Wconversion -Werror
 #CXXFLAGS = -std=c++11 -O3 -Wall
 
 # folders
@@ -44,3 +44,4 @@ all: $(OBJ)
 
 clean:
 	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)*
+

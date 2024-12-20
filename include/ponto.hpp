@@ -1,8 +1,6 @@
 #ifndef PONTO
 #define PONTO
 
-//#include "consumidor.hpp"
-
 class Ponto{
     private:
         int identificador;

@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <iostream>
-#include "algoritmo.hpp"
+#include "../include/algoritmo.hpp"
 
 int main(){
     int numPontos;
@@ -67,47 +67,6 @@ int main(){
 
     std::vector<std::pair<int, int>> saturadas = grafoResidual.getSaturadas();
     std::cout << saturadas.size() << std::endl;
-    
-    /*for(auto [i, j] : saturadas) {
-        int capacidadeMaior = 0;
-        int imaior = -1;
-        int jmaior = -1;
-        for(auto [i, j] : saturadas) {
-            if(capacidades[i][j] > capacidadeMaior){
-                capacidadeMaior = capacidades[i][j];
-                imaior = i;
-                jmaior = j;
-            }
-        }
-        std::cout << imaior << " " << jmaior << " " << capacidades[i][j] << std::endl;
-        saturadas.pop(i,j);
-    }*/ 
-
-    /*while (!saturadas.empty()) {
-        int capacidadeMaior = 0;
-        int imaior = -1;
-        int jmaior = -1;
-        size_t indiceMaior = 0;
-
-        // Encontrar a aresta com maior capacidade
-        for (size_t idx = 0; idx < saturadas.size(); ++idx) {
-            auto [i, j] = saturadas[idx];
-            if (capacidades[i][j] > capacidadeMaior) {
-                capacidadeMaior = capacidades[i][j];
-                imaior = i;
-                jmaior = j;
-                indiceMaior = idx;
-            }
-        }
-
-        // Imprimir a aresta com maior capacidade
-        if (imaior != -1 && jmaior != -1) {
-            std::cout << imaior << " " << jmaior << " " << capacidadeMaior << std::endl;
-        }
-
-        // Remover a aresta com maior capacidade da lista manualmente
-        saturadas.erase(saturadas.begin() + indiceMaior);
-    }*/
 
     while (!saturadas.empty()) {
         int capacidadeMaior = 0;
@@ -115,14 +74,14 @@ int main(){
         int jmaior = -1;
         size_t indiceMaior = 0;
 
-        // Encontrar a aresta com maior capacidade
-        for (size_t idx = 0; idx < saturadas.size(); ++idx) {
-            auto [i, j] = saturadas[idx];
+        for (size_t indice = 0; indice < saturadas.size(); ++indice) {
+            int i = saturadas[indice].first;
+            int j = saturadas[indice].second;
             if (capacidades[i][j] > capacidadeMaior) {
                 capacidadeMaior = capacidades[i][j];
                 imaior = i;
                 jmaior = j;
-                indiceMaior = idx;
+                indiceMaior = indice;
             }
         }
 
@@ -132,8 +91,8 @@ int main(){
         }
 
         // Remover manualmente o elemento encontrado
-        for (size_t idx = indiceMaior; idx < saturadas.size() - 1; ++idx) {
-            saturadas[idx] = saturadas[idx + 1];
+        for (size_t indice = indiceMaior; indice < saturadas.size() - 1; ++indice) {
+            saturadas[indice] = saturadas[indice + 1];
         }
         saturadas.pop_back();
     }

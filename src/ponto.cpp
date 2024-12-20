@@ -1,4 +1,4 @@
-#include "ponto.hpp"
+#include "../include/ponto.hpp" 
 
 Ponto::Ponto(){
     identificador = -1;

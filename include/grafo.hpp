@@ -4,17 +4,14 @@
 #include <map>
 #include <vector>
 
-//#include "gerador.hpp"
-//#include "consumidor.hpp"
 #include "ponto.hpp"
 #define TAMANHO 100
 
 
 class Grafo{
     private:
-        //std::map<int, std::vector<int>> conexoes;
         int** capacidades; //usada como capacidade do original e como fluxo pra frente no residual
-        int** fluxos; //usada como fluxo de volta no residual
+        int** fluxos; //usada como reversas
 
         Ponto origemGlobal;
         Ponto destinoGlobal;

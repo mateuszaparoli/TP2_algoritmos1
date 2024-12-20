@@ -1,4 +1,4 @@
-#include "grafo.hpp"
+#include "../include/grafo.hpp"
 #include <iostream>
 
 Grafo::Grafo(){
@@ -65,7 +65,7 @@ void Grafo::setConexao(int origem, int destino, int capacidade){
         primeira = true;
     }
     capacidades[origem][destino] = capacidade;
-    if(capacidades[0][origem] != -1 && origem != 0 && primeira == true){
+    if(capacidades[0][origem] != -1 && origem != 0 && primeira){
         this->geracaoTotal += capacidade;
     }
     //std::cout << "Conexao de " << origem << " para " << destino << " de capacidade " << capacidade << " estabelecida" << std::endl;
@@ -160,7 +160,7 @@ bool Grafo::getAtivo(int i){
 std::vector<std::pair<int, int>> Grafo::getSaturadas() {
     std::vector<std::pair<int, int>> saturadas;
     for(int i = 1; i < TAMANHO-1; i++){
-        for(int j = 1; j < TAMANHO-1; j++){
+        for(int j = TAMANHO - 2; j >= 1; j--){
             if(capacidades[i][j] == 0) {
                 saturadas.push_back({i, j});
             }

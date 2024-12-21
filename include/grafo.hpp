@@ -4,8 +4,8 @@
 #include <map>
 #include <vector>
 
-#include "ponto.hpp"
-#define TAMANHO 100
+#include "../include/ponto.hpp"
+#define TAMANHO 1000
 
 
 class Grafo{
@@ -23,7 +23,6 @@ class Grafo{
     public:
         Grafo();
         ~Grafo();
-        //void adicionarOrigemDestino();
         void setConexao(int origem, int destino, int capacidade);
         void setConexaoReversa(int origem, int destino, int capacidade);
         void addPonto(Ponto ponto);

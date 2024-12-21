@@ -9,7 +9,6 @@ int main(){
     Grafo redeEletrica; 
     Grafo grafoResidual;
 
-    //redeEletrica.adicionarOrigemDestino();
     int** capacidades;
     capacidades = new int*[TAMANHO];
     for(int i = 0; i < TAMANHO; i++){
@@ -52,10 +51,6 @@ int main(){
         grafoResidual.setConexao(origem, destino, capacidade);
         capacidades[origem][destino] = capacidade;
     }
-
-    //redeEletrica.print();
-
-    //std::cout << "Grafo Residual" << std::endl;
     
     int fluxoMax = fordFulkerson(&grafoResidual, redeEletrica.getOrigem(), redeEletrica.getDestino());
 
@@ -74,6 +69,7 @@ int main(){
         int jmaior = -1;
         size_t indiceMaior = 0;
 
+        //encontrar a aresta com maior capacidade
         for (size_t indice = 0; indice < saturadas.size(); ++indice) {
             int i = saturadas[indice].first;
             int j = saturadas[indice].second;
@@ -85,12 +81,11 @@ int main(){
             }
         }
 
-        // Imprimir a aresta com maior capacidade
         if (imaior != -1 && jmaior != -1) {
             std::cout << imaior << " " << jmaior << " " << capacidadeMaior << std::endl;
         }
 
-        // Remover manualmente o elemento encontrado
+        // remover o elemento já printado
         for (size_t indice = indiceMaior; indice < saturadas.size() - 1; ++indice) {
             saturadas[indice] = saturadas[indice + 1];
         }
@@ -98,7 +93,7 @@ int main(){
     }
 
 
-
+    //limpar a memória
     for(int i = 0; i < TAMANHO; i++){
         delete[] capacidades[i];
     }

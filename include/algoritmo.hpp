@@ -1,7 +1,9 @@
-#include "grafo.hpp"
+#include "../include/grafo.hpp"
 #include <queue>
 #include <climits>
 
+
+//BFS para achar os caminhos simples
 bool BFS(Grafo* residual, int* antecessores, bool* reversed, bool* visitados, int origemID, int destinoID){
     std::queue<int> fila;
     fila.push(origemID);
@@ -44,6 +46,7 @@ bool BFS(Grafo* residual, int* antecessores, bool* reversed, bool* visitados, in
     return visitados[destinoID];
 }
 
+//Ford Fulkerson algoritimo principal do programa
 int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
     bool visitados[TAMANHO];
     int antecessores[TAMANHO];
@@ -62,6 +65,7 @@ int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
 
         int fluxoCaminho = INT_MAX;
 
+        //laço para encontrar o fluxo do caminho
         for(int i = destino.getIdentificador(); i != origem.getIdentificador(); i = antecessores[i]){
             int j = antecessores[i];
             if(reversed[i]) {
@@ -75,6 +79,7 @@ int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
             }
         }
 
+        //laço para atualizar a capacidade das arestas do grafo residual
         for(int i = destino.getIdentificador(); i != origem.getIdentificador(); i = antecessores[i]){
             int j = antecessores[i];
             if(reversed[i]) {
@@ -87,6 +92,7 @@ int fordFulkerson(Grafo* grafoResidual, Ponto origem, Ponto destino){
         }
         
         fluxoMax += fluxoCaminho;
+        //reinicializar os vetores
         for(int i = 0; i < TAMANHO ; i++){
             visitados[i] = false;
         }

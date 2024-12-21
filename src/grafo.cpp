@@ -37,29 +37,20 @@ Grafo::Grafo(){
     ativos[0] = 1;
     ativos[TAMANHO - 1] = 1;
 
-    //vertices.push_back(origemGlobal);
-    //vertices.push_back(destinoGlobal);
-
-    //this->vertices = std::vector<Ponto>();
 }
 
-//arrumar os delete talvez colocar free
 Grafo::~Grafo(){
-    //for(int i = 0; i < TAMANHO; i++){
-    //    delete[] capacidades[i];
-    //}
-    //delete[] capacidades;
-    //for(int i = 0; i < TAMANHO; i++){
-    //    delete[] fluxos[i];
-    //}
-    //delete[] fluxos;
+    for(int i = 0; i < TAMANHO; i++){
+        delete[] capacidades[i];
+    }
+    delete[] capacidades;
+    for(int i = 0; i < TAMANHO; i++){
+        delete[] fluxos[i];
+    }
+    delete[] fluxos;
 }
 
 void Grafo::setConexao(int origem, int destino, int capacidade){
-    //if(capacidades[origem][destino] != -1){
-    //    std::cout << "Conexao de " << origem << " para " << destino << " ja existe" << std::endl;
-    //    return;
-    //}
     bool primeira = false;
     if(capacidades[origem][destino] == -1){
         primeira = true;
@@ -68,7 +59,6 @@ void Grafo::setConexao(int origem, int destino, int capacidade){
     if(capacidades[0][origem] != -1 && origem != 0 && primeira){
         this->geracaoTotal += capacidade;
     }
-    //std::cout << "Conexao de " << origem << " para " << destino << " de capacidade " << capacidade << " estabelecida" << std::endl;
     return;
 }
 
@@ -80,13 +70,11 @@ void Grafo::setConexaoReversa(int origem, int destino, int capacidade){
 void Grafo::addPonto(Ponto ponto){
     if(ponto.getTipo() == 'g'){
         setConexao(origemGlobal.getIdentificador(), ponto.getIdentificador(), 20000);
-        //vertices.push_back(ponto);
         ativos[ponto.getIdentificador()] = 1;
         return;
     }
     else if(ponto.getTipo() == 'c'){
         setConexao(ponto.getIdentificador(), destinoGlobal.getIdentificador(), ponto.getDemanda());
-        //vertices.push_back(ponto);
         ativos[ponto.getIdentificador()] = 1;
         return;
     }
@@ -118,8 +106,6 @@ void Grafo::printMatriz(){
     return;
 }
 
-//achar um jeito de nao ter a aresta 0-2 no residual
-
 void Grafo::criarGrafoResidual(Grafo* grafo,Grafo* grafoResidual){
     for(int i = 0; i < TAMANHO; i++){
        for(int j = 0; j < TAMANHO; j++){
@@ -149,7 +135,6 @@ Ponto Grafo::getDestino(){
 }
 
 Ponto Grafo::getOrigem(){
-    //std::cout << "origem: " << origemGlobal.getIdentificador() << std::endl;
     return origemGlobal;
 }
 

@@ -26,7 +26,6 @@ CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wpedantic -Wformat-security -Wconversion
 
 # folders
 INCLUDE_FOLDER = ./include/
-BIN_FOLDER = ./bin/
 OBJ_FOLDER = ./obj/
 SRC_FOLDER = ./src/
 
@@ -40,7 +39,7 @@ $(OBJ_FOLDER)%.o: $(SRC_FOLDER)%.cpp
 	$(CC) $(CXXFLAGS) -c $< -o $@ -I$(INCLUDE_FOLDER)
 
 all: $(OBJ)
-	$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET) $(OBJ)
+	$(CC) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
 clean:
-	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)*
+	@rm -rf $(OBJ_FOLDER)* $(TARGET)
